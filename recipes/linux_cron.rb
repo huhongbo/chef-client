@@ -29,7 +29,10 @@ root_group = value_for_platform(
 
 # COOK-635 account for alternate gem paths
 # try to use the bin provided by the node attribute
-if (chef_in_sane_path=Chef::Client::SANE_PATHS.map{|p| p="#{p}/chef-client";p if ::File.executable?(p)}.compact.first) && chef_in_sane_path
+if ::File.executable?(node["chef_client"]["bin"])
+  client_bin = node["chef_client"]["bin"]
+  # search for the bin in some sane paths
+elsif (chef_in_sane_path=Chef::Client::SANE_PATHS.map{|p| p="#{p}/chef-client";p if ::File.executable?(p)}.compact.first) && chef_in_sane_path
   client_bin = chef_in_sane_path
   # last ditch search for a bin in PATH
 elsif (chef_in_path=%x{which chef-client}.chomp) && ::File.executable?(chef_in_path)
@@ -39,14 +42,6 @@ else
 end
 
 
-%w{run_path cache_path backup_path log_dir}.each do |key|
-  directory node["chef_client"][key] do
-    recursive true
-    owner "root"
-    group root_group
-    mode 0755
-  end
-end
 
 cron "chef-client" do
   minute node['chef_client']['cron']['minute']	
