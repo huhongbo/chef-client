@@ -6,6 +6,11 @@
 #
 # All rights reserved - Do Not Redistribute
 #
-# cron hpux
-# aix
-#linux
+
+directory "/etc/chef/plugins" do
+  action :create
+end
+
+template "/etc/chef/client.rb" do
+  source "client.rb.erb"
+end

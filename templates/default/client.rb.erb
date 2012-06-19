@@ -1,0 +1,10 @@
+log_level        :info
+log_location     #<IO:0x7f742367eac8>
+
+chef_server_url  "http://pc-mon02:4000"
+validation_client_name "chef-validator"
+# Using default node name
+
+file_backup_path   "/var/chef/backup"
+file_cache_path    "/var/chef/cache"
+Ohai::Config[:plugin_path] << '/etc/chef/plugins'
