@@ -10,7 +10,7 @@ default["chef_client"]["conf_dir"]    = "/etc/chef"
 default["chef_client"]["bin"]         = "/usr/bin/chef-client"
 default["chef_client"]["server_url"]  = "http://pc-mon02:4000"
 default["chef_client"]["validation_client_name"] = "chef-validator"
-default["chef_client"]["cron"] = { "minute" => "0,5,10,15,20,25,30,35,40,45,50,55", "hour" => "*", "path" => nil}
+default["chef_client"]["cron"] = { "minute" => "0,15,30,45", "hour" => "*", "path" => nil}
 default["chef_client"]["environment"] = nil
 
 case platform
