@@ -16,7 +16,7 @@ cron "chef-client" do
   minute node['chef_client']['cron']['minute']	
   hour	node['chef_client']['cron']['hour']
   user	"root"
-  command "#{client_bin} -s 180"
+  command ". /.profile;#{client_bin} -s 180"
 end
 
 
