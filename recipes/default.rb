@@ -14,3 +14,15 @@ end
 template "/etc/chef/client.rb" do
   source "client.rb.erb"
 end
+
+remote_directory "/var/chef/gems" do
+  source "gems"
+  recursive true
+end
+
+gem_package "chef" do
+  source "/var/chef/gems/chef-10.12.0.gem"
+  options "--no-ri --no-rdoc"
+  version "10.12.0"
+  action :install
+end
